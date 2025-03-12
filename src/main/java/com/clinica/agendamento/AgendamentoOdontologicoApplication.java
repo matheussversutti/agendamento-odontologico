@@ -1,4 +1,4 @@
-package com.clinica.agendamento.agendamento_odontologico;
+package com.clinica.agendamento;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
