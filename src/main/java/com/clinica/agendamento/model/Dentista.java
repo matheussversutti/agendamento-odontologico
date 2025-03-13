@@ -2,18 +2,18 @@ package com.clinica.agendamento.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.time.LocalDate;
 
-@Document(collection = "pacientes")
-public class Paciente {
+@Document(collection = "dentistas")
+public class Dentista {
 
     @Id
     private String id;
     private String nome;
+    private String especialidade;
     private String email;
     private String telefone;
-    private LocalDate dataNascimento;
 	
+    
     public String getId() {
 		return id;
 	}
@@ -25,6 +25,12 @@ public class Paciente {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	public String getEspecialidade() {
+		return especialidade;
+	}
+	public void setEspecialidade(String especialidade) {
+		this.especialidade = especialidade;
 	}
 	public String getEmail() {
 		return email;
@@ -38,11 +44,4 @@ public class Paciente {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public LocalDate getDataNascimento() {
-		return dataNascimento;
-	}
-	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-
 }
