@@ -3,61 +3,86 @@ package com.clinica.agendamento.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-import java.time.LocalDateTime;
 
-@Document(collection = "consultas")
+import java.time.Instant;
+
+@Document(collection = "consultas") // Nome da coleção no MongoDB
 public class Consulta {
 
     @Id
-    private String id;
-    private LocalDateTime dataHora;
-    private String status;
+    private String id; // Identificador único
+
+    private Instant dataHora; // Data e hora da consulta
+    private String status; // Status da consulta (agendada, cancelada, concluída)
 
     @DBRef
-    private Paciente paciente;
+    private Paciente paciente; // Referência ao documento Paciente
 
     @DBRef
-    private Dentista dentista;
+    private Dentista dentista; // Referência ao documento Dentista
 
-	public String getId() {
-		return id;
-	}
+    // Construtor padrão
+    public Consulta() {
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    // Construtor com parâmetros
+    public Consulta(Instant dataHora, String status, Paciente paciente, Dentista dentista) {
+        this.dataHora = dataHora;
+        this.status = status;
+        this.paciente = paciente;
+        this.dentista = dentista;
+    }
 
-	public LocalDateTime getDataHora() {
-		return dataHora;
-	}
+    // Getters e Setters
+    public String getId() {
+        return id;
+    }
 
-	public void setDataHora(LocalDateTime dataHora) {
-		this.dataHora = dataHora;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getStatus() {
-		return status;
-	}
+    public Instant getDataHora() {
+        return dataHora;
+    }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+    public void setDataHora(Instant dataHora) {
+        this.dataHora = dataHora;
+    }
 
-	public Paciente getPaciente() {
-		return paciente;
-	}
+    public String getStatus() {
+        return status;
+    }
 
-	public void setPaciente(Paciente paciente) {
-		this.paciente = paciente;
-	}
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
-	public Dentista getDentista() {
-		return dentista;
-	}
+    public Paciente getPaciente() {
+        return paciente;
+    }
 
-	public void setDentista(Dentista dentista) {
-		this.dentista = dentista;
-	}
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
 
-    
+    public Dentista getDentista() {
+        return dentista;
+    }
+
+    public void setDentista(Dentista dentista) {
+        this.dentista = dentista;
+    }
+
+    // Método toString para facilitar a visualização
+    @Override
+    public String toString() {
+        return "Consulta{" +
+                "id='" + id + '\'' +
+                ", dataHora=" + dataHora +
+                ", status='" + status + '\'' +
+                ", paciente=" + paciente +
+                ", dentista=" + dentista +
+                '}';
+    }
 }

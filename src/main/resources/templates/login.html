@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Login - Clínica Odontológica</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+    <title>Login - Administrador</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
     <div class="login-container">
-        <h2>Login de Administrador</h2>
+        <h2>Login do Administrador</h2>
+        
+        <!-- Mensagem de erro -->
+        <div th:if="${param.error}" class="error-message">
+            Usuário ou senha incorretos. Tente novamente.
+        </div>
+        
+        <!-- Mensagem de logout -->
+        <div th:if="${param.logout}" class="logout-message">
+            Você foi desconectado com sucesso.
+        </div>
 
-        <!-- Mensagem informativa -->
-        <p class="info-message">⚠️ Este é um acesso exclusivo para administradores. Se você não é administrador, por favor, não prossiga.</p>
-
-        <form method="post" action="/login">
-            <!-- Exibe mensagem de erro, caso exista -->
-            <div th:if="${param.error}">
-                <p class="error-message">Usuário ou senha inválidos. Tente novamente.</p>
-            </div>
-
-            <!-- Token CSRF -->
-            <div th:if="${_csrf != null}">
-                <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
-            </div>
-
+        <form th:action="@{/login}" method="post">
             <div>
                 <label for="username">Usuário:</label>
                 <input type="text" id="username" name="username" required>
             </div>
-
             <div>
                 <label for="password">Senha:</label>
                 <input type="password" id="password" name="password" required>
             </div>
-
-            <button type="submit">Entrar</button>
+            <div>
+                <button type="submit">Entrar</button>
+            </div>
         </form>
     </div>
 </body>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="dashboard-container">
+        <h1>Bem-vindo ao Painel de Controle</h1>
+        <p>Selecione uma das opções na barra de navegação para gerenciar o sistema.</p>
+        
+        <!-- Cards de estatísticas -->
+        <div class="quick-stats">
+            <div class="stat-card">
+                <h3>Total de Pacientes</h3>
+                <p th:text="${totalPacientes}">0</p> <!-- Valor dinâmico -->
+            </div>
+            <div class="stat-card">
+                <h3>Consultas Hoje</h3>
+                <p th:text="${consultasHoje}">0</p> <!-- Valor dinâmico -->
+            </div>
+        </div>
+    </div>
+</body>
+</html>

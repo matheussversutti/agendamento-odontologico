@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pacientes</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="pacientes-container">
+        <h1>Lista de Pacientes</h1>
+        <a th:href="@{/pacientes/novo}" class="btn">Novo Paciente</a>
+
+        <!-- Mensagem de "Nenhum usuário cadastrado" -->
+        <div th:if="${pacientes.empty}">
+            <div class="no-pacientes">
+                Ainda não temos usuários cadastrados neste sistema.
+            </div>
+        </div>
+
+        <!-- Tabela de pacientes -->
+        <table th:unless="${pacientes.empty}">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>Data de Nascimento</th>
+                    <th class="acoes-header">
+                        <div class="acoes-content">
+                            Ações <!-- Texto "Ações" alinhado à direita e centralizado verticalmente -->
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="paciente : ${pacientes}">
+                    <td th:text="${paciente.nome}"></td>
+                    <td th:text="${paciente.email}"></td>
+                    <td th:text="${paciente.telefone}"></td>
+                    <td th:text="${paciente.dataNascimento}"></td>
+                    <td class="acoes-cell">
+                        <div class="acoes-content">
+                            <a th:href="@{/pacientes/editar/{id}(id=${paciente.id})}" class="btn">Editar</a>
+                            <a th:href="@{/pacientes/excluir/{id}(id=${paciente.id})}" class="btn btn-danger">Excluir</a>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Navbar</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:fragment="navbar">
+        <nav class="navbar">
+            <div class="navbar-brand">
+                <a th:href="@{/admin/dashboard}" style="color: white; text-decoration: none;">
+                    Clinica Odontológica
+                </a>
+            </div>
+            <ul class="navbar-nav">
+                <li><a th:href="@{/pacientes}">Pacientes</a></li>
+                <li><a th:href="@{/dentistas}">Dentistas</a></li>
+                <li><a th:href="@{/consultas}">Consultas</a></li>
+                <li><a th:href="@{/admin/administradores}">Administradores</a></li>
+                <li>
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit" class="logout-button">Logout</button>
+                    </form>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</body>
+</html>
