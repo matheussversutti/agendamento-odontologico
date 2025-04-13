@@ -8,19 +8,16 @@
 <body>
     <div th:fragment="navbar">
         <nav class="navbar">
-            <div class="navbar-brand">
-                <a th:href="@{/admin/dashboard}" style="color: white; text-decoration: none;">
-                    Clinica Odontológica
-                </a>
+            <div class="navbar-brand" th:onclick="|window.location.href='@{/painel-admin}'|">
+                Clínica Odonto Vida
             </div>
             <ul class="navbar-nav">
-                <li><a th:href="@{/pacientes}">Pacientes</a></li>
-                <li><a th:href="@{/dentistas}">Dentistas</a></li>
-                <li><a th:href="@{/consultas}">Consultas</a></li>
-                <li><a th:href="@{/admin/administradores}">Administradores</a></li>
+                <li><a class="nav-link" href="/pacientes">Pacientes</a></li>
+                <li><a class="nav-link" href="/dentistas">Dentistas</a></li>
+                <li><a class="nav-link" href="/consultas">Consultas</a></li>
                 <li>
                     <form th:action="@{/logout}" method="post">
-                        <button type="submit" class="logout-button">Logout</button>
+                        <button class="logout-button" type="submit">Sair</button>
                     </form>
                 </li>
             </ul>

@@ -1,7 +1,5 @@
 package com.clinica.agendamento.model;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,11 +7,9 @@ import jakarta.validation.constraints.Past;
 
 import java.time.LocalDate;
 
-@Document(collection = "pacientes") // Nome da coleção no MongoDB
-public class Paciente {
+public class PacienteDTO {
 
-    @Id
-    private String id; // ID gerado automaticamente pelo MongoDB
+    private String id; // <-- Adicionado
 
     @NotBlank(message = "O nome é obrigatório")
     private String nome;
@@ -24,15 +20,13 @@ public class Paciente {
 
     @NotBlank(message = "O telefone é obrigatório")
     private String telefone;
-    
 
     @NotNull(message = "A data de nascimento é obrigatória")
     @Past(message = "A data de nascimento deve ser no passado")
     private LocalDate dataNascimento;
-    
-    @NotBlank(message = "A senha é obrigatória")
+
     private String senha;
-    
+    private String confirmarSenha;
 
     // Getters e Setters
     public String getId() {
@@ -66,7 +60,7 @@ public class Paciente {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
+
     public LocalDate getDataNascimento() {
         return dataNascimento;
     }
@@ -74,12 +68,20 @@ public class Paciente {
     public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
     public String getSenha() {
-    	return senha;
+        return senha;
     }
-    
+
     public void setSenha(String senha) {
-    	this.senha = senha;
+        this.senha = senha;
     }
-    
+
+    public String getConfirmarSenha() {
+        return confirmarSenha;
+    }
+
+    public void setConfirmarSenha(String confirmarSenha) {
+        this.confirmarSenha = confirmarSenha;
+    }
 }

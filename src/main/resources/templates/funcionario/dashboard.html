@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Painel do Funcionário</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <div th:replace="~{fragments/navbar :: navbar}"></div>
+
+    <div class="dashboard-container">
+        <h1>Painel do Funcionário</h1>
+        <p>Veja abaixo as consultas agendadas:</p>
+
+        <!-- Aqui futuramente vem uma tabela de consultas -->
+        <div>
+            <p>🔍 Filtros por dia, nome, etc. serão adicionados depois!</p>
+        </div>
+    </div>
+</body>
+</html>

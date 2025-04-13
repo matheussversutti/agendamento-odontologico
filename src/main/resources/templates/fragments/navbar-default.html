@@ -1,0 +1,11 @@
+<!-- fragments/navbar-default.html -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light" th:fragment="navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Clínica Odonto Vida</a>
+
+    <div class="d-flex ms-auto">
+      <a class="btn btn-outline-primary me-2" th:href="@{/login}">Login</a>
+      <a class="btn btn-outline-success" th:href="@{/cadastro}">Cadastro</a>
+    </div>
+  </div>
+</nav>

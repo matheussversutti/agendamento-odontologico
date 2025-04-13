@@ -11,28 +11,102 @@
 
     <div class="form-container">
         <h1>Formulário de Paciente</h1>
-        <form th:action="@{/pacientes}" th:object="${paciente}" method="post">
+        <form id="formCadastroPaciente" 
+              th:action="@{${pacienteDTO.id} != null ? '/pacientes/editar' : '/pacientes'}" 
+              th:object="${pacienteDTO}" 
+              method="post">
+
+            <!-- Campo oculto para o ID -->
+            <input type="hidden" th:field="*{id}" />
+
             <div>
                 <label for="nome">Nome:</label>
                 <input type="text" id="nome" th:field="*{nome}" required>
+                <span class="erro" id="erroNome"></span>
             </div>
             <div>
                 <label for="email">Email:</label>
                 <input type="email" id="email" th:field="*{email}" required>
+                <span class="erro" id="erroEmail"></span>
             </div>
             <div>
                 <label for="telefone">Telefone:</label>
                 <input type="text" id="telefone" th:field="*{telefone}" required>
+                <span class="erro" id="erroTelefone"></span>
             </div>
             <div>
+                <span class="erro" id="erroDataNascimento"></span>
                 <label for="dataNascimento">Data de Nascimento:</label>
                 <input type="date" id="dataNascimento" th:field="*{dataNascimento}" required>
             </div>
+            <div>
+                <span class="erro" id="erroSenha"></span>
+                <label for="senha">Senha:</label>
+                <input type="password" id="senha" th:field="*{senha}" required>
+            </div>
+            <div>
+                <label for="confirmarSenha">Confirmar Senha:</label>
+                <input type="password" id="confirmarSenha" th:field="*{confirmarSenha}" required>
+                <span class="erro" id="erroConfirmarSenha"></span>
+            </div>
+
             <div class="form-actions">
                 <button type="submit" class="btn">Salvar</button>
                 <a th:href="@{/pacientes}" class="btn btn-secondary">Cancelar</a>
             </div>
         </form>
     </div>
+
+    <!-- SCRIPT DE VALIDAÇÃO DE SENHAS E IDADE MÍNIMA -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("formCadastroPaciente");
+            const senha = document.getElementById("senha");
+            const confirmarSenha = document.getElementById("confirmarSenha");
+            const erroSenha = document.getElementById("erroSenha");
+            const erroConfirmarSenha = document.getElementById("erroConfirmarSenha");
+            const erroIdade = document.getElementById("erroDataNascimento");
+
+            const dataNascimento = document.getElementById("dataNascimento");
+
+            function verificarIdadeMinima() {
+                const dataNascimentoValue = new Date(dataNascimento.value);
+                const hoje = new Date();
+                let idade = hoje.getFullYear() - dataNascimentoValue.getFullYear();
+                const mes = hoje.getMonth() - dataNascimentoValue.getMonth();
+                if (mes < 0 || (mes === 0 && hoje.getDate() < dataNascimentoValue.getDate())) {
+                    idade--;
+                }
+
+                if (idade < 14) {
+                    erroIdade.textContent = "O paciente deve ter pelo menos 14 anos para se cadastrar.";
+                    return false;
+                } else {
+                    erroIdade.textContent = "";
+                    return true;
+                }
+            }
+
+            form.addEventListener("submit", function (event) {
+                let erroEncontrado = false;
+
+                if (senha.value !== confirmarSenha.value) {
+                    erroConfirmarSenha.textContent = "As senhas não coincidem!";
+                    erroEncontrado = true;
+                } else {
+                    erroConfirmarSenha.textContent = "";
+                }
+
+                if (!verificarIdadeMinima()) {
+                    erroEncontrado = true;
+                }
+
+                if (erroEncontrado) {
+                    event.preventDefault();
+                }
+            });
+        });
+    </script>
+
 </body>
 </html>

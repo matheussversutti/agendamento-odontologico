@@ -15,27 +15,28 @@ import java.time.ZoneId;
 public class AdminController {
 
     @Autowired
-    private PacienteRepository pacienteRepository; // Repositório de pacientes
+    private PacienteRepository pacienteRepository;
 
     @Autowired
-    private ConsultaRepository consultaRepository; // Repositório de consultas
+    private ConsultaRepository consultaRepository;
 
-    @GetMapping("/admin/dashboard")
+    @GetMapping("/painel-admin")
     public String dashboard(Model model) {
-        // Obtém o total de pacientes cadastrados
+        // Calculando o total de pacientes
         long totalPacientes = pacienteRepository.count();
 
-        // Obtém o total de consultas agendadas para hoje
+        // Calculando o total de consultas no dia
         LocalDate hoje = LocalDate.now();
         Instant inicioDoDia = hoje.atStartOfDay(ZoneId.systemDefault()).toInstant();
         Instant fimDoDia = hoje.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant();
 
         long consultasHoje = consultaRepository.countByDataHoraBetween(inicioDoDia, fimDoDia);
 
-        // Passa os valores para o template Thymeleaf
+        // Passando os dados para a view
         model.addAttribute("totalPacientes", totalPacientes);
         model.addAttribute("consultasHoje", consultasHoje);
 
-        return "admin/dashboard"; // Retorna a página dashboard.html
+        // Retorna a view do painel
+        return "admin/painel-admin";
     }
 }

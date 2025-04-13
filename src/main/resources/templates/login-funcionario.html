@@ -1,24 +1,22 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login - Administrador</title>
+    <title>Login - Funcionário</title>
     <link rel="stylesheet" th:href="@{/css/styles.css}">
 </head>
 <body>
     <div class="login-container">
-        <h2>Login do Administrador</h2>
-        
-        <!-- Mensagem de erro -->
+        <h2>Login do Funcionário</h2>
+
         <div th:if="${param.error}" class="error-message">
             Usuário ou senha incorretos. Tente novamente.
         </div>
-        
-        <!-- Mensagem de logout -->
+
         <div th:if="${param.logout}" class="logout-message">
             Você foi desconectado com sucesso.
         </div>
 
-        <form th:action="@{/login}" method="post">
+        <form th:action="@{/login-funcionario}" method="post">
             <div>
                 <label for="username">Usuário:</label>
                 <input type="text" id="username" name="username" required>
@@ -31,6 +29,11 @@
                 <button type="submit">Entrar</button>
             </div>
         </form>
+
+        <!-- Botão Voltar -->
+        <div>
+            <a th:href="@{/}" class="btn-back">Voltar</a>
+        </div>
     </div>
 </body>
 </html>
